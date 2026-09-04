@@ -2,23 +2,39 @@ class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
 
-        vector<int> vec1;
+        vector<int> ans;
 
-        for(int i=0; i < nums1.size(); i++){
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
 
-            for(int j=0 ; j < nums2.size(); j++){
+        int i = 0;
+        int j = 0;
 
-                if(nums1[i] == nums2[j]){
-                    if(find(vec1.begin(), vec1.end(), nums1[i]) == vec1.end()){
-                        vec1.push_back(nums1[i]);
-                    }
-                    
+        while(i < nums1.size() && j < nums2.size()) {
+
+            if(nums1[i] == nums2[j]) {
+
+                if(ans.empty() || ans.back() != nums1[i]) {
+                    ans.push_back(nums1[i]);
                 }
 
-            }
+        // Add only if it is not already in answer
 
-        }
-        return vec1;   
+                i++;
+                j++;
+
+            }
+            else if(nums1[i] < nums2[j]) {
+
+                i++;
+
+            }
+            else {
+
+                j++;
+            }
+        } 
+        return ans; 
         
     }
 };
