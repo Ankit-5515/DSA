@@ -1,27 +1,21 @@
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
+    vector<int> twoSum(vector<int>& arr, int tar) {
 
-        vector<int> vec1;
-        
-        int i = 0, j = 1;
-        
-        while(j < nums.size()){
+        unordered_map<int,int> m;
+        vector<int> ans;
 
-            
-            if(nums[i] + nums[j] == target){
-                vec1.push_back(i);
-                vec1.push_back(j);
+        for(int i=0; i<arr.size(); i++){
+            int first = arr[i];
+            int sec = tar - first;
+
+            if(m.find(sec) != m.end()){
+                ans.push_back(i);
+                ans.push_back(m[sec]);
                 break; 
-                
-            }else{
-                j++;
             }
-            if( j == nums.size()){
-                i++;
-                j = i + 1;
-            }
+            m[first] = i;
         }
-        return vec1;
+        return ans; 
     }
 };
